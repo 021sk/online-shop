@@ -5,6 +5,7 @@ USE_TZ = True
 USE_I18N = True
 LANGUAGE_CODE = "en-us"
 ROOT_URLCONF = "config.urls"
+AUTH_USER_MODEL = "accounts.User"
 WSGI_APPLICATION = "config.wsgi.application"
 TIME_ZONE = config("TIME_ZONE", default="UTC")
 DEBUG = config("DEBUG", cast=bool, default=True)
@@ -36,7 +37,9 @@ INSTALLED_APPS = [
     # third parth
     # my apps
     "apps.core",
-    "apps.account",
+    "apps.accounts",
+    "apps.home",
+    "apps.order",
 ]
 
 MIDDLEWARE = [
