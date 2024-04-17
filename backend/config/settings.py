@@ -22,6 +22,7 @@ ALLOWED_HOSTS = (
     )
 )
 
+
 # Applications
 
 INSTALLED_APPS = [
@@ -34,7 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third parth
     # my apps
-    "core",
+    "apps.core",
+    "apps.account",
 ]
 
 MIDDLEWARE = [
