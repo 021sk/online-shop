@@ -13,3 +13,10 @@ class User(AbstractUser, TimeStampMixin, LogicalMixin):
 class Address(TimeStampMixin, LogicalMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     address = models.TextField()
+
+    # def activate(self):
+    #     # Deactivate all other addresses for the same user
+    #     self.user.addresses.exclude(id=self.id).update(is_active=False)
+    #     # Activate this address
+    #     self.is_active = True
+    #     self.save(update_fields=["is_active"])
