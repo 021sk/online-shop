@@ -77,8 +77,8 @@ class UserModelTest(TestCase):
         # Ensure the user is initially inactive
         self.assertFalse(self.user.is_active)
 
-        # # Activate the user
-        # self.user.activate()
-        #
-        # # Check if the user is activated
-        # self.assertTrue(self.user.is_active)
+        # Activate the user
+        self.user.activate()
+
+        # Check if the user is activated
+        self.assertTrue(self.user.is_active)

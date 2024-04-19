@@ -40,5 +40,9 @@ class LogicalMixin(models.Model):
         self.is_active = False
         self.save(update_fields=["is_active"])
 
+    def activate(self):
+        self.is_active = True
+        self.save(update_fields=["is_active"])
+
     class Meta:
         abstract = True
