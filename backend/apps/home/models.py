@@ -49,3 +49,6 @@ class Image(models.Model):
     )
     file = models.ImageField(upload_to="")
     title = models.CharField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
