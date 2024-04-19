@@ -10,6 +10,6 @@ class User(AbstractUser, TimeStampMixin, LogicalMixin):
         return self.first_name + " " + self.last_name
 
 
-class Address(models.Model):
+class Address(TimeStampMixin, LogicalMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     address = models.TextField()

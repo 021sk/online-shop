@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Title</title>
+</head>
+<body>
+<header class="flex justify-center items-center text-shadow-header">
+    <span class="title">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path class="color-change-2x"
+                                                                            d="M47.5,-57.3C58.6,-47.3,62.5,-29.5,66,-11.4C69.4,6.6,72.2,25,66.7,42.3C61.2,59.6,47.4,75.9,31.1,79C14.8,82.1,-3.9,72.1,-22.5,64.3C-41.1,56.5,-59.6,50.8,-70.5,37.9C-81.4,24.9,-84.6,4.7,-78.8,-11.5C-73,-27.6,-58.3,-39.8,-43.7,-49.1C-29.1,-58.5,-14.5,-65,1.8,-67.2C18.2,-69.4,36.4,-67.3,47.5,-57.3Z"
+                                                                            transform="translate(100 100)"/></svg>
+        <a href="{% url "home" %}"><span class="text-white">{{ site.title }} <i class="super-span irsans-b">{{ site.sub_title }}</i></span></a>
+    </span>
+    <span class="content mr-2 bold color-change-2x trs-all-300">
+        <span class="text-sm sm:text-2xl">{{ site.short_description }}</span>
+            <a href="{% url "contact" %}" title="{% trans "Contact us" %}" hover-class="animate__animated animate__tada"
+               class="bg-red-500 border-dashed border border-red-700 ring-2 ring-red-500 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-0 -top-12"
+               style="margin-left: 1px;margin-top: -4px"><i class="gb text-white gb_perm_phone_msg gb_s24"></i>
+            </a>
+            <a href="{% url "about" %}" title="{% trans "About us" %}" hover-class="animate__animated animate__tada"
+               class="bg-yellow-400 border-dashed border border-yellow-600 ring-2 ring-yellow-400 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-12 -top-12"
+               style="margin-left: 6px;margin-top: -4px"><i class="gb text-white gb_info gb_s24"></i>
+            </a>
+            <a href="{% url "profile" %}" title="{% trans "Account" %}" hover-class="animate__animated animate__tada"
+               class="bg-green-500 border-dashed border border-green-700 ring-2 ring-green-500 w-10 h-10 text-shadow-md rounded-lg text-center flex items-center justify-center absolute left-24 -top-12"
+               style="margin-left: 12px;margin-top: -4px"><i class="gb text-white gb_assignment_ind gb_s24"
+                                                             style="margin-left: 2px"></i>
+            </a>
+            <a href="{{ site.url_full }}" class="home-link ltr"><i class="gb mr-2 gb_share mb-1"></i>
+                <span class="text-sm sm:text-xl">{{ site.url }}</span><div
+                        class="sub-link ">Ver {{ site.version }}</div>
+            </a>
+        </span>
+    <div class="clearfix"></div>
+</header>
+
+</body>
+</html>
