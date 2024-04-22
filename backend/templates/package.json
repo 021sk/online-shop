@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/tailwind.css -o ./public/assets/css/app.css --watch",
+    "build": "npx prettier ./public/**/*.html --write && npx tailwindcss -i ./src/tailwind.css -o ./public/assets/css/app.css --minify"
+  }
+}

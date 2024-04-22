@@ -87,14 +87,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # serving
 
-STATIC_URL = "static/"
+STATIC_URL = "assets/"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Mode Handling:
 
 if DEBUG:
-    STATICFILES_DIRS = [BASE_DIR / "static"]
+    STATICFILES_DIRS = [BASE_DIR / "assets"]
 
     DATABASES = {
         "default": {
