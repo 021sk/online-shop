@@ -1,13 +1,26 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from apps.core.models import TimeStampMixin, LogicalMixin
+from apps.accounts.manager import UserManager
 
 
 class User(AbstractUser, TimeStampMixin, LogicalMixin):
     phone = models.CharField(max_length=11, unique=True)
+    email = models.EmailField(unique=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["username"]),
+            models.Index(fields=["email"]),
+        ]
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+    objects = UserManager()
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email"]
 
 
 class Address(TimeStampMixin, LogicalMixin):
