@@ -1,8 +1,15 @@
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-urlpatterns = []
+urlpatterns = [
+    # / => base
+    path("", include("apps.accounts.urls")),
+    path("", include("apps.home.urls")),
+    # /profile/
+    # /notification
+    # /(search)/product/<key>
+]
 
 if settings.DEBUG:
     from django.conf.urls.static import static

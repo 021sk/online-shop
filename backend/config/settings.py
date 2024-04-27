@@ -22,7 +22,9 @@ ALLOWED_HOSTS = (
         "ALLOWED_HOSTS", cast=lambda hosts: [h.strip() for h in hosts.split(",") if h]
     )
 )
-
+AUTHENTICATION_BACKENDS = [
+    "apps.accounts.backend.ModelBackend",
+]
 
 # Applications
 
