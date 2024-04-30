@@ -6,7 +6,8 @@ from apps.accounts.manager import UserManager
 
 class User(AbstractUser, TimeStampMixin, LogicalMixin):
     phone = models.CharField(max_length=11, unique=True)
-    email = models.EmailField(unique=True)
+    is_active = models.BooleanField("active", default=False)
+    email = models.EmailField()
 
     class Meta:
         indexes = [
@@ -21,6 +22,11 @@ class User(AbstractUser, TimeStampMixin, LogicalMixin):
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
+
+    def save(self, *args, **kwargs):
+        if not self.is_superuser:
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
 
 
 class Address(TimeStampMixin, LogicalMixin):
