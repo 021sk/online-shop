@@ -14,7 +14,29 @@ class CreateUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["username", "phone", "email", "password"]
+        fields = ["username", "phone", "email"]
+        widgets = {
+            "username": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "email": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "phone": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+        }
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

@@ -23,10 +23,11 @@ class User(AbstractUser, TimeStampMixin, LogicalMixin):
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
 
-    def save(self, *args, **kwargs):
-        if not self.is_superuser:
-            self.set_password(self.password)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.is_superuser:
+    #         self.set_password(self.password)
+    #     super().save(*args, **kwargs)
+    #
 
 
 class Address(TimeStampMixin, LogicalMixin):

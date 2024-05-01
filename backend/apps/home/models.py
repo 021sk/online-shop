@@ -14,7 +14,8 @@ class Category(models.Model):
     )
 
     class Meta:
-        pass
+        ordering = ["name"]
+        indexes = [models.Index(fields=["name"])]
 
     def __str__(self):
         return self.name
@@ -23,8 +24,9 @@ class Category(models.Model):
 class Product(TimeStampMixin, LogicalMixin):
     category = models.ManyToManyField(Category, related_name="products")
     name = models.CharField(max_length=200)
-    # slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
     # image = models.ImageField()
+    inventory = models.PositiveIntegerField(default=0)
     description = models.TextField()
     price = models.IntegerField()
     discount = models.PositiveIntegerField(
@@ -35,20 +37,40 @@ class Product(TimeStampMixin, LogicalMixin):
     )
 
     class Meta:
-        pass
+        ordering = ["-create_at"]
+        indexes = [
+            models.Index(fields=["id", "slug"]),
+            models.Index(fields=["name"]),
+            models.Index(fields=["-create_at"]),
+        ]
 
     def __str__(self):
         return self.name
 
 
-class Image(models.Model):
+class Image(TimeStampMixin):
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name="images",
     )
-    file = models.ImageField(upload_to="")
+    file = models.ImageField(upload_to="product_images")
     title = models.CharField(max_length=250, null=True, blank=True)
+
+    class Meta:
+        ordering = ["-create_at"]
+        indexes = [models.Index(fields=["-create_at"])]
 
     def __str__(self):
         return self.title
+
+
+class ProductFeature(models.Model):
+    name = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
+    product = models.ForeignKey(
+        Product, related_name="features", on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.name + ":" + self.value
