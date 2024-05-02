@@ -10,6 +10,7 @@ class Order(TimeStampMixin, LogicalMixin):
     )
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True, null=True, default=None)
+
     # address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def __str__(self):
