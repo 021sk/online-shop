@@ -3,6 +3,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("product/", include("apps.home.urls.product")),
-    path("", include("apps.home.urls.homebase")),
+    # path("", include("apps.home.urls.homebase")),
     # path("", homebase.HomeView.as_view(), name="home"),
 ]

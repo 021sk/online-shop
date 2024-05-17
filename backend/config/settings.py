@@ -30,13 +30,15 @@ AUTHENTICATION_BACKENDS = [
 
 INSTALLED_APPS = [
     # default
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # third parth
+    # third-party
+    "rest_framework",
     # my apps
     "apps.core",
     "apps.accounts",
@@ -125,6 +127,7 @@ if DEBUG:
     EMAIL_HOST_PASSWORD = "sxdn ehvn iyhs dqrs"
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
+
 else:
     REDIS_URL = f"redis://{config('REDIS_HOST')}:{config('REDIS_PORT')}"
 
@@ -153,3 +156,9 @@ else:
     EMAIL_HOST_USER = config("EMAIL_USER")
     EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
     DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+# CELERY_TIMEZONE = TIME_ZONE
+# CELERY_BROKER_URL = "redis://localhost:6379/0"
+# CELERY_BROKER_BACKEND = "redis://localhost:6379/1"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379/2"
+# CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True

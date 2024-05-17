@@ -1,7 +1,6 @@
-from django.db import models
-from django.urls import reverse
-
 from apps.core.models import TimeStampMixin, LogicalMixin
+from django.urls import reverse
+from django.db import models
 
 
 class Category(models.Model):
@@ -73,7 +72,7 @@ class Image(TimeStampMixin):
         on_delete=models.CASCADE,
         related_name="images",
     )
-    file = models.ImageField(upload_to="product_images/%Y%m%d")
+    file = models.ImageField(upload_to="product_images/%Y/%m/%d")
     title = models.CharField(max_length=250, null=True, blank=True)
 
     class Meta:

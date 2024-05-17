@@ -1,15 +1,31 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
+
 
 User = get_user_model()
 
 
 class CreateUserForm(forms.ModelForm):
-    password1 = forms.CharField(widget=forms.PasswordInput, label="Password")
+    password1 = forms.CharField(
+        min_length=7,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+            }
+        ),
+        label="Password",
+    )
+
     password2 = forms.CharField(
-        widget=forms.PasswordInput, label="password confirmation"
+        min_length=7,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            }
+        ),
+        label="Password confirmation",
     )
 
     class Meta:
@@ -41,6 +57,11 @@ class CreateUserForm(forms.ModelForm):
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
+        if password2:
+            try:
+                password_validation.validate_password(password2, self.instance)
+            except ValidationError as error:
+                self.add_error("password2", error)
         if password1 and password2 and password1 != password2:
             raise ValidationError("Passwords don't match")
         return password2

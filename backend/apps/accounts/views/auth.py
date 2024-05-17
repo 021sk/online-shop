@@ -1,20 +1,23 @@
 from django.contrib.auth import authenticate, login, get_user_model, logout
-from django.http import response
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic
-from utils import catche, mail
-from django.core.cache import cache
-from apps.accounts import form
 from django.contrib.messages.views import SuccessMessageMixin
+
+# from apps.accounts.tasks import print_after_3s, send_mail
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 from django.contrib import messages
-
+from django.core.cache import cache
+from django.http import response
+from django.views import generic
+from utils import catche, mail
+from apps.accounts import form
 from uuid import uuid4
 
 User = get_user_model()
 
 
-# @method_decorator(csrf_exempt, name="dispatch")
+@method_decorator(csrf_exempt, name="dispatch")
 class LoginView(generic.View):
     template_name = "public/login-password.html"
 
@@ -33,6 +36,9 @@ class LoginView(generic.View):
         if user := authenticate(password=password, username=username):
             if user.is_active:
                 login(self.request, user)
+                print("Logged in successfully")
+                # print_after_3s.apply_async(args=[])
+
                 return redirect("home")
 
             # create token and activate
@@ -41,6 +47,7 @@ class LoginView(generic.View):
             ):
                 print(cache.get(f"activate_token_user_{user.username}"))
                 # send_verification_code
+                # username = user.username
                 mail.send_mail(
                     f"Verification {user.username}",
                     user.email,
@@ -51,11 +58,13 @@ class LoginView(generic.View):
                         "host": self.request.get_host(),
                     },
                 )
+
             return redirect("public_activate_page")
 
         return response.HttpResponse("User not found !", status=404)
 
 
+#######################################################################################
 class VerificationView(generic.View):
     template_name = "pages/verify_successfull.html"
 
@@ -119,3 +128,50 @@ class LogoutView(generic.RedirectView):
 #             user.set_password(form.cleaned_data['password2'])
 #             user.save()
 #             return render(request, 'registration/register.html', {'user': user, 'form': self.form})
+
+# @method_decorator(csrf_exempt, name="dispatch")
+# class LoginView(generic.View):
+#     template_name = "public/login-password.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         return render(request, self.template_name)
+
+# def post(self, request):
+#     username = self.request.POST.get("username")
+#     password = self.request.POST.get("password")
+#
+#     if not all((username, password)):
+#         return response.HttpResponse(
+#             "'username' or 'password' should not be null !", status=400
+#         )
+#
+#     user = authenticate(request, username=username, password=password)
+#
+#     if user is not None:
+#         if user.is_active:
+#             login(request, user)
+#             return redirect("home")
+#         else:
+#             # User is not active, generate activation token and send email
+#             activation_token_key = f"activate_token_user_{user.username}"
+#             activation_token = uuid4().hex
+#
+#             # Save activation token in cache
+#             cache.set(activation_token_key, activation_token, 300)
+#
+#             # Send verification email
+#             send_mail.delay(
+#                 f"Verification {user.username}",
+#                 user.email,
+#                 "mail/verification.html",
+#                 {
+#                     "username": user.username,
+#                     "token": activation_token,
+#                     "host": request.get_host(),
+#                 },
+#             )
+#
+#             return redirect("public_activate_page")
+#     else:
+#         return response.HttpResponse("User not found or incorrect password!", status=404)
+#

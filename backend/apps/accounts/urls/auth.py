@@ -1,14 +1,14 @@
 from django.urls import path
-from apps.accounts import views
+from apps.accounts.views import auth
 
 urlpatterns = [
-    path("login/", views.LoginView.as_view(), name="login"),
+    path("login/", auth.LoginView.as_view(), name="login"),
     path(
         "verification/<str:username>/<str:token>",
-        views.VerificationView.as_view(),
+        auth.VerificationView.as_view(),
         name="verification",
     ),
-    path("register/", views.UserRegisterView.as_view(), name="registration"),
-    path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("register/", auth.UserRegisterView.as_view(), name="registration"),
+    path("logout/", auth.LogoutView.as_view(), name="logout"),
     # (auth)/forget-password
 ]

@@ -2,10 +2,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from apps.core.models import TimeStampMixin, LogicalMixin
 from apps.accounts.manager import UserManager
+from django.core.validators import RegexValidator
 
 
 class User(AbstractUser, TimeStampMixin, LogicalMixin):
-    phone = models.CharField(max_length=11, unique=True)
+    phone = models.CharField(
+        max_length=11,
+        unique=True,
+        validators=[
+            RegexValidator(
+                "(0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}",
+                "invalid phone number",
+            )
+        ],
+    )
     is_active = models.BooleanField("active", default=False)
     email = models.EmailField()
 

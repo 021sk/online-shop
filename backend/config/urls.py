@@ -4,8 +4,10 @@ from django.urls import path, include
 
 urlpatterns = [
     # / => base
+    path("api-auth/", include("rest_framework.urls")),
     path("", include("apps.accounts.urls")),
     path("", include("apps.home.urls")),
+    path("", include("public.urls")),
     # /profile/
     # /notification
     # /(search)/product/<key>
