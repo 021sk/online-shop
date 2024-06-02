@@ -1342,8 +1342,9 @@
                       </span>
                       <span
                         class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
+                        id="item_count"
                       >
-                        10
+                        {{ cart|length }}
                       </span>
                     </button>
 
@@ -3352,14 +3353,18 @@
                     type="button"
                   >
                     <span class="cursor-pointer">
+
                       <svg class="h-6 w-6">
-                        <use xlink:href="#cart" />
+
+                        <use xlink:href="#cart"></use>
                       </svg>
+
                     </span>
                     <span
                       class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
-                    >
-                      10
+                    id="item_count">
+                      {{ cart|length }}
+
                     </span>
                   </button>
                 </div>
@@ -5159,7 +5164,7 @@
                         </div>
                         <!-- add to cart -->
                         <div class="mb-6">
-                          <button class="btn-primary w-full py-3">
+                          <button class="btn-primary w-full py-3" id="add-cart">
                             افزودن به سبد خرید
                           </button>
                         </div>
@@ -7821,7 +7826,27 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        $(document).ready(function (){
+          $('#add-cart').click(function (){
+              var button = $(this);
+
+              $.ajax({
+                 type: 'post',
+                 url: '{% url 'api_cart:add_to_cart' product.id %}',
+
+                 success:function(data){
+                     $('#item_count').text(data.item_count);
+
+
+                 },
+              });
+
+
+          });
+
+      });
       const copyToClipboardSocialShareDesktop = (button) => {
         const linkToCopy = button.getAttribute("data-link");
         if (linkToCopy) {

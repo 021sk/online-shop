@@ -955,7 +955,7 @@
                     <img
                       alt=""
                       class="w-44 text-red-700"
-                      src="./assets/images/logo.svg"
+                      src="/assets/images/logo.svg"
                     />
                   </a>
                 </div>
@@ -996,7 +996,7 @@
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img
-                                  src="./assets/images/products/p6.png"
+                                  src="/assets/images/products/p6.png"
                                   alt="Product Image"
                                   class="w-16"
                                 />
@@ -1011,7 +1011,7 @@
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img
-                                  src="./assets/images/products/p4.png"
+                                  src="/assets/images/products/p4.png"
                                   alt="Product Image"
                                   class="w-16"
                                 />
@@ -3359,7 +3359,7 @@
                     <span
                       class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
                     >
-                      10
+                      1
                     </span>
                   </button>
                 </div>
@@ -5166,7 +5166,7 @@
                         </div>
                         <!-- add to cart -->
                         <div class="mb-6">
-                          <button class="btn-primary w-full py-3">
+                          <button class="btn-primary w-full py-3" id="addd-cart">
                             افزودن به سبد خرید
                           </button>
                         </div>
@@ -8423,7 +8423,26 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+      $(document).ready(function (){
+          $('#add-cart').click(function (){
+              var button = $(this);
+
+              $.ajax({
+                 type: 'post',
+                 url: '{% url 'cart:add_to_cart' product.id %}',
+                 success:function(data){
+                     $('item_count').text(data.item_count)
+
+
+                 },
+              });
+
+
+          });
+
+      });
       const copyToClipboardSocialShareDesktop = (button) => {
         const linkToCopy = button.getAttribute("data-link");
         if (linkToCopy) {

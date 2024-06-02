@@ -2,7 +2,7 @@ from apps.core.manager import LogicalManager
 from django.contrib.auth.models import UserManager as BaseUserManager
 
 
-class UserManager(BaseUserManager, LogicalManager):
+class UserManager(LogicalManager, BaseUserManager):
     def create_user(self, username, email=None, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)

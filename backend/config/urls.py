@@ -8,6 +8,7 @@ urlpatterns = [
     path("", include("apps.accounts.urls")),
     path("", include("apps.home.urls")),
     path("", include("public.urls")),
+    path("", include("apps.order.urls")),
     # /profile/
     # /notification
     # /(search)/product/<key>

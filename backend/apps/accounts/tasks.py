@@ -1,18 +1,30 @@
-# from celery import shared_task
-#
-#
-# @shared_task
-# def print_after_3s():
-#     # sleep(20)
-#     print("hello how are you !")
+from celery import shared_task
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+@shared_task
+def remove_not_active_user():
+    User.objects.filter(is_active=False).delete()
 
 
 # from django.conf import settings
 # from django.core.mail import EmailMultiAlternatives
 # from django.template.loader import render_to_string
 # from celery import shared_task
+# from apps.accounts.models import User
 
+
+# @shared_task
+# def print_after_3s():
+#     # sleep(20)
+#     print("hello how are you !")
+#     user = User.objects.get(id=1)
+#     user.phone = "4444444"
+#     user.save()
 #
+
 # @shared_task
 # def send_mail(
 #         subject: str,
@@ -30,8 +42,6 @@
 #     )
 #     msg.attach_alternative(html_content, "text/html")
 #     msg.send()
-#
-
 
 # @shared_task
 # def send_mail(

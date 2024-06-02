@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
 
-# from apps.accounts.tasks import print_after_3s, send_mail
+# from apps.accounts.tasks import send_mail, print_after_3s
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
@@ -37,7 +37,7 @@ class LoginView(generic.View):
             if user.is_active:
                 login(self.request, user)
                 print("Logged in successfully")
-                # print_after_3s.apply_async(args=[])
+                # print_after_3s.delay()
 
                 return redirect("home")
 
@@ -103,6 +103,7 @@ class UserRegisterView(generic.CreateView, SuccessMessageMixin):
         return super().form_valid(forms)
 
 
+############################################################################
 class LogoutView(generic.RedirectView):
     url = "/"
 

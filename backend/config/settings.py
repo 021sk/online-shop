@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third-party
     "rest_framework",
+    "storages",
+    "django_celery_beat",
     # my apps
     "apps.core",
     "apps.accounts",
@@ -67,6 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "apps.order.context_processors.cart",
             ],
         },
     },
@@ -156,7 +159,7 @@ else:
     EMAIL_HOST_USER = config("EMAIL_USER")
     EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
     DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
-
+#
 # CELERY_TIMEZONE = TIME_ZONE
 # CELERY_BROKER_URL = "redis://localhost:6379/0"
 # CELERY_BROKER_BACKEND = "redis://localhost:6379/1"
