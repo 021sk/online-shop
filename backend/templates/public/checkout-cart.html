@@ -5,17 +5,17 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>سبد خرید</title>
 
-    <link href="./assets/css/fonts.css" rel="stylesheet" />
-    <link href="./assets/css/dependencies/swiper.min.css" rel="stylesheet" />
-    <link href="./assets/css/theme.css" rel="stylesheet" />
-    <link href="./assets/css/custom.css" rel="stylesheet" />
-    <link href="./assets/css/app.css" rel="stylesheet" />
+    <link href="/assets/css/fonts.css" rel="stylesheet" />
+    <link href="/assets/css/dependencies/swiper.min.css" rel="stylesheet" />
+    <link href="/assets/css/theme.css" rel="stylesheet" />
+    <link href="/assets/css/custom.css" rel="stylesheet" />
+    <link href="/assets/css/app.css" rel="stylesheet" />
 
-    <script src="./assets/scripts/mount.js"></script>
-    <script defer src="./assets/scripts/dependencies/flowbite.min.js"></script>
-    <script defer src="./assets/scripts/dependencies/swiper.min.js"></script>
-    <script defer src="./assets/scripts/app.js"></script>
-    <script defer src="./assets/scripts/custom.js"></script>
+    <script src="/assets/scripts/mount.js"></script>
+    <script defer src="/assets/scripts/dependencies/flowbite.min.js"></script>
+    <script defer src="/assets/scripts/dependencies/swiper.min.js"></script>
+    <script defer src="/assets/scripts/app.js"></script>
+    <script defer src="/assets/scripts/custom.js"></script>
   </head>
 
   <body>
@@ -954,7 +954,7 @@
                     <img
                       alt=""
                       class="w-44 text-red-700"
-                      src="./assets/images/logo.svg"
+                      src="/assets/images/logo.svg"
                     />
                   </a>
                 </div>
@@ -995,7 +995,7 @@
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img
-                                  src="./assets/images/products/p6.png"
+                                  src="/assets/images/products/p6.png"
                                   alt="Product Image"
                                   class="w-16"
                                 />
@@ -1010,7 +1010,7 @@
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img
-                                  src="./assets/images/products/p4.png"
+                                  src="/assets/images/products/p4.png"
                                   alt="Product Image"
                                   class="w-16"
                                 />
@@ -1025,7 +1025,7 @@
                                 class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                               >
                                 <img
-                                  src="./assets/images/products/p5.png"
+                                  src="/assets/images/products/p5.png"
                                   alt="Product Image"
                                   class="w-16"
                                 />
@@ -1236,7 +1236,7 @@
                                 <img
                                   alt="profile"
                                   class="h-8 w-8 rounded-full"
-                                  src="./assets/images/user.png"
+                                  src="/assets/images/user.png"
                                 />
                               </span>
                               <span class="line-clamp-1"> نام تستی تستی </span>
@@ -1341,8 +1341,9 @@
                       </span>
                       <span
                         class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
+                        id="item_count"
                       >
-                        10
+                        {{ cart|length }}
                       </span>
                     </button>
 
@@ -1380,7 +1381,7 @@
                                     alt=""
                                     class="h-[120px] w-[120px]"
                                     loading="lazy"
-                                    src="./assets/images/products/p1.png"
+                                    src="/assets/images/products/p1.png"
                                   />
                                 </a>
                                 <button
@@ -1473,7 +1474,7 @@
                                     alt=""
                                     class="h-[120px] w-[120px]"
                                     loading="lazy"
-                                    src="./assets/images/products/p2.png"
+                                    src="/assets/images/products/p2.png"
                                   />
                                 </a>
                                 <button
@@ -3317,7 +3318,7 @@
                     <img
                       alt=""
                       class="h-6 w-full rounded-lg xs:h-10"
-                      src="./assets/images/logo.svg"
+                      src="/assets/images/logo.svg"
                     />
                   </a>
                 </div>
@@ -3402,7 +3403,7 @@
                                   class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                                 >
                                   <img
-                                    src="./assets/images/products/p6.png"
+                                    src="/assets/images/products/p6.png"
                                     alt="Product Image"
                                     class="w-16"
                                   />
@@ -3417,7 +3418,7 @@
                                   class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                                 >
                                   <img
-                                    src="./assets/images/products/p4.png"
+                                    src="/assets/images/products/p4.png"
                                     alt="Product Image"
                                     class="w-16"
                                   />
@@ -3432,7 +3433,7 @@
                                   class="flex items-center gap-x-2 rounded-xl border px-4 py-2 text-text/60 hover:border-border/50"
                                 >
                                   <img
-                                    src="./assets/images/products/p5.png"
+                                    src="/assets/images/products/p5.png"
                                     alt="Product Image"
                                     class="w-16"
                                   />
@@ -3643,7 +3644,7 @@
                 <img
                   alt=""
                   class="h-10 w-full rounded-lg"
-                  src="./assets/images/logo.svg"
+                  src="/assets/images/logo.svg"
                 />
               </a>
             </div>
@@ -4199,7 +4200,7 @@
                       <img
                         alt=""
                         class="h-10 w-10 rounded-full"
-                        src="./assets/images/user.png"
+                        src="/assets/images/user.png"
                       />
                     </span>
                     <span class="line-clamp-1">تست تست تست تسستست تسست </span>
@@ -4329,7 +4330,7 @@
                         alt=""
                         class="h-20 w-20"
                         loading="lazy"
-                        src="./assets/images/products/p1.png"
+                        src="/assets/images/products/p1.png"
                       />
                     </a>
                     <button
@@ -4404,7 +4405,7 @@
                         alt=""
                         class="h-20 w-20"
                         loading="lazy"
-                        src="./assets/images/products/p2.png"
+                        src="/assets/images/products/p2.png"
                       />
                     </a>
                     <button
@@ -4479,7 +4480,7 @@
                         alt=""
                         class="h-20 w-20"
                         loading="lazy"
-                        src="./assets/images/products/p3.png"
+                        src="/assets/images/products/p3.png"
                       />
                     </a>
                     <button
@@ -4554,7 +4555,7 @@
                         alt=""
                         class="h-20 w-20"
                         loading="lazy"
-                        src="./assets/images/products/p4.png"
+                        src="/assets/images/products/p4.png"
                       />
                     </a>
                     <button
@@ -4687,7 +4688,7 @@
                     class="flex items-center gap-x-4 text-sm xs:text-base md:text-lg"
                   >
                     سبد خرید
-                    <span class="text-sm text-text/60"> ( 2 کالا ) </span>
+                    <span class="text-sm text-text/60"> ( {{ cart|length }} کالا ) </span>
                   </h1>
                   <button type="button" class="btn-red-nobg px-3 py-2 text-sm">
                     <span>
@@ -4699,24 +4700,25 @@
                   </button>
                 </div>
                 <ul class="divide-y">
+                  {% for item in cart %}
                   <!-- Cart Item-->
                   <li>
-                    <div class="py-4 sm:py-6">
+                    <div class="product-item py-4 sm:py-6" data-item-id="{{ item.product.id }}">
                       <div
                         class="grid grid-cols-2 items-center justify-start gap-2 xs:grid-cols-3 xs:gap-6 sm:grid-cols-4 xl:grid-cols-6"
                       >
                         <!-- Image -->
                         <div class="relative row-span-2 min-w-fit xs:mx-auto">
-                          <a href="#">
+                          <a href="{{ item.product.get_absolute_url }}">
                             <img
                               alt=""
                               class="w-25 rounded-lg sm:w-28"
-                              src="./assets/images/products/p7.png"
+                              src="{{ item.product.images.first.file.url }}"
                             />
                           </a>
 
                           <button
-                            class="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background"
+                            class="quantity-remove absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background"
                             type="button"
                           >
                             <svg class="h-6 w-6 text-red-600 dark:text-red-500">
@@ -4730,7 +4732,7 @@
                         >
                           <!-- Title -->
                           <a class="line-clamp-2 text-sm xs:text-base" href="#">
-                            کیف دستی دلسی مدل CHATELET AIR 2.0 کد 1676350
+                            {{ item.product.name }}
                           </a>
                           <!-- Variant -->
                           <div class="flex items-center gap-x-2">
@@ -4750,18 +4752,18 @@
                           <div
                             class="flex h-10 w-24 items-center justify-between gap-x-3 rounded-lg border py-1 sm:w-28"
                           >
-                            <button type="button" data-action="increment">
+                            <button type="button" data-action="increment" class="quantity-add">
                               <svg class="h-5 w-5 text-primary sm:h-6 sm:w-6">
                                 <use xlink:href="#plus" />
                               </svg>
                             </button>
                             <input
-                              value="1"
+                              value="{{ item.quantity }}"
                               disabled
                               type="number"
                               class="flex h-5 w-5 select-none items-center justify-center bg-transparent text-center text-sm font-medium outline-none sm:h-6 sm:w-6 sm:text-lg"
                             />
-                            <button type="button" data-action="decrement">
+                            <button type="button" data-action="decrement" class="quantity-decrease">
                               <svg
                                 class="h-5 w-5 text-red-600 dark:text-red-500 sm:h-6 sm:w-6"
                               >
@@ -4774,174 +4776,13 @@
                         <div
                           class="text-primary xs:col-span-2 sm:col-span-3 lg:text-lg xl:col-span-5"
                         >
-                          <span class="font-bold">1,200,000</span>
+                          <span class="font-bold" id="item-total-{{ item.product.id }}">{{ item.total }}</span>
                           <span class="text-sm lg:text-base">تومان</span>
                         </div>
                       </div>
                     </div>
                   </li>
-                  <!-- Cart Item-->
-                  <li>
-                    <div class="py-4 sm:py-6">
-                      <div
-                        class="grid grid-cols-2 items-center justify-start gap-2 xs:grid-cols-3 xs:gap-6 sm:grid-cols-4 xl:grid-cols-6"
-                      >
-                        <!-- Image -->
-                        <div class="relative row-span-2 min-w-fit xs:mx-auto">
-                          <a href="#">
-                            <img
-                              alt=""
-                              class="w-25 rounded-lg sm:w-28"
-                              src="./assets/images/products/p7.png"
-                            />
-                          </a>
-
-                          <button
-                            class="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background"
-                            type="button"
-                          >
-                            <svg class="h-6 w-6 text-red-600 dark:text-red-500">
-                              <use xlink:href="#close"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <!-- Detail -->
-                        <div
-                          class="row-span-2 space-y-4 xs:col-span-2 sm:col-span-3 xl:col-span-5"
-                        >
-                          <!-- Title -->
-                          <a class="line-clamp-2 text-sm xs:text-base" href="#">
-                            کیف دستی دلسی مدل CHATELET AIR 2.0 کد 1676350
-                          </a>
-                          <!-- Variant -->
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="h-4 w-4 rounded-full"
-                              style="background: #782f2f"
-                            ></span>
-                            <span class="text-xs text-text/90 xs:text-sm">
-                              قهوه ای</span
-                            >
-                          </div>
-                        </div>
-                        <!-- Quantity -->
-                        <div
-                          class="flex items-center gap-x-2 xs:justify-center"
-                        >
-                          <div
-                            class="flex h-10 w-24 items-center justify-between gap-x-3 rounded-lg border py-1 sm:w-28"
-                          >
-                            <button type="button" data-action="increment">
-                              <svg class="h-5 w-5 text-primary sm:h-6 sm:w-6">
-                                <use xlink:href="#plus" />
-                              </svg>
-                            </button>
-                            <input
-                              value="1"
-                              disabled
-                              type="number"
-                              class="flex h-5 w-5 select-none items-center justify-center bg-transparent text-center text-sm font-medium outline-none sm:h-6 sm:w-6 sm:text-lg"
-                            />
-                            <button type="button" data-action="decrement">
-                              <svg
-                                class="h-5 w-5 text-red-600 dark:text-red-500 sm:h-6 sm:w-6"
-                              >
-                                <use xlink:href="#trash" />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                        <!-- Price -->
-                        <div
-                          class="text-primary xs:col-span-2 sm:col-span-3 lg:text-lg xl:col-span-5"
-                        >
-                          <span class="font-bold">1,200,000</span>
-                          <span class="text-sm lg:text-base">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- Cart Item-->
-                  <li>
-                    <div class="py-4 sm:py-6">
-                      <div
-                        class="grid grid-cols-2 items-center justify-start gap-2 xs:grid-cols-3 xs:gap-6 sm:grid-cols-4 xl:grid-cols-6"
-                      >
-                        <!-- Image -->
-                        <div class="relative row-span-2 min-w-fit xs:mx-auto">
-                          <a href="#">
-                            <img
-                              alt=""
-                              class="w-25 rounded-lg sm:w-28"
-                              src="./assets/images/products/p7.png"
-                            />
-                          </a>
-
-                          <button
-                            class="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-background"
-                            type="button"
-                          >
-                            <svg class="h-6 w-6 text-red-600 dark:text-red-500">
-                              <use xlink:href="#close"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <!-- Detail -->
-                        <div
-                          class="row-span-2 space-y-4 xs:col-span-2 sm:col-span-3 xl:col-span-5"
-                        >
-                          <!-- Title -->
-                          <a class="line-clamp-2 text-sm xs:text-base" href="#">
-                            کیف دستی دلسی مدل CHATELET AIR 2.0 کد 1676350
-                          </a>
-                          <!-- Variant -->
-                          <div class="flex items-center gap-x-2">
-                            <span
-                              class="h-4 w-4 rounded-full"
-                              style="background: #782f2f"
-                            ></span>
-                            <span class="text-xs text-text/90 xs:text-sm">
-                              قهوه ای</span
-                            >
-                          </div>
-                        </div>
-                        <!-- Quantity -->
-                        <div
-                          class="flex items-center gap-x-2 xs:justify-center"
-                        >
-                          <div
-                            class="flex h-10 w-24 items-center justify-between gap-x-3 rounded-lg border py-1 sm:w-28"
-                          >
-                            <button type="button" data-action="increment">
-                              <svg class="h-5 w-5 text-primary sm:h-6 sm:w-6">
-                                <use xlink:href="#plus" />
-                              </svg>
-                            </button>
-                            <input
-                              value="1"
-                              disabled
-                              type="number"
-                              class="flex h-5 w-5 select-none items-center justify-center bg-transparent text-center text-sm font-medium outline-none sm:h-6 sm:w-6 sm:text-lg"
-                            />
-                            <button type="button" data-action="decrement">
-                              <svg
-                                class="h-5 w-5 text-red-600 dark:text-red-500 sm:h-6 sm:w-6"
-                              >
-                                <use xlink:href="#minus" />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                        <!-- Price -->
-                        <div
-                          class="text-primary xs:col-span-2 sm:col-span-3 lg:text-lg xl:col-span-5"
-                        >
-                          <span class="font-bold">1,200,000</span>
-                          <span class="text-sm lg:text-base">تومان</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                {% endfor %}
                 </ul>
               </div>
             </div>
@@ -4953,11 +4794,11 @@
                   <!-- cart items price before discount - coupon -->
                   <div class="flex items-center justify-between gap-x-2 py-6">
                     <div class="text-sm text-text/90 lg:text-base">
-                      قیمت کالا ها (2)
+                      قیمت کالا ها ({{ cart|length }})
                     </div>
 
                     <div class="text-sm text-primary lg:text-base">
-                      <span class="font-bold">2,400,000</span>
+                      <span class="font-bold " id="item-total-price">{{ cart.get_total_price }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
@@ -4969,7 +4810,7 @@
                     <div
                       class="text-sm font-medium text-red-500 dark:text-red-400 lg:text-base"
                     >
-                      <span class="font-bold">1,220,000</span>
+                      <span class="font-bold" id="item-total-discount">{{ cart.get_total_discount }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
@@ -4981,7 +4822,7 @@
                     </div>
 
                     <div class="text-sm text-primary lg:text-base">
-                      <span class="font-bold">2,400,000</span>
+                      <span class="font-bold" id="item-total-newprice">{{ cart.get_total_after_price }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
@@ -5016,4 +4857,82 @@
       </main>
     </div>
   </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+       $(document).ready(function(){
+
+        $('.quantity-add').on('click', function(){
+            updateQuantity($(this).closest('.product-item').data('item-id'), 'add');
+        });
+
+        $('.quantity-decrease').on('click', function(){
+            updateQuantity($(this).closest('.product-item').data('item-id'), 'decrease');
+        });
+
+         $('.quantity-remove').on('click', function(){
+            removeItem($(this).closest('.product-item').data('item-id'));
+        });
+
+
+        function updateQuantity(itemId, action){
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'api_cart:update_quantity' %}',
+                data: {
+                    'item_id': itemId,
+                    'action': action,
+
+                },
+                success: function(response){
+                    if (response.success) {
+                        $('#item_count').text(response.item_count);
+
+                        $('#item-quantity-'+ itemId).text(response.quantity);
+                        $('#item-total-'+ itemId).text(response.total );
+                        $('#item-total-price').text(response.total_price);
+                        $('#item-total-discount').text(response.total_discount);
+                        $('#item-total-newprice').text(response.total_newprice);
+
+
+
+                    } else {
+                        alert('Error updating quantity!');
+                    }
+                }
+
+            });
+        }
+
+        function removeItem(itemId){
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'api_cart:remove_item' %}',
+                data: {
+                    'item_id': itemId,
+
+                },
+                success: function(response){
+                    if (response.success) {
+                        $('#item_count').text(response.item_count);
+                        $('#item-total-price').text(response.total_price);
+                        $('#item-total-discount').text(response.total_discount);
+                        $('#item-total-newprice').text(response.total_newprice);
+                        $(`.product-item[data-item-id=${itemId}]`).remove();
+                    } else {
+                        alert('Error updating quantity!');
+                    }
+                }
+
+            });
+        }
+       });
+
+
+
+
+
+
+
+
+</script>
 </html>

@@ -12,7 +12,12 @@ class Cart(object):
     def add(self, product):
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {"quantity": 1, "price": product.new_price}
+            self.cart[product_id] = {
+                "quantity": 1,
+                "price": product.price,
+                "after_price": product.new_price,
+                "discount": product.discount,
+            }
         else:
             if self.cart[product_id]["quantity"] < product.inventory:
                 self.cart[product_id]["quantity"] += 1
@@ -20,7 +25,7 @@ class Cart(object):
 
     def decrease(self, product):
         product_id = str(product.id)
-        if self.cart[product_id]["quantity"] > 0:
+        if self.cart[product_id]["quantity"] > 1:
             self.cart[product_id]["quantity"] -= 1
         self.save()
 
@@ -40,6 +45,18 @@ class Cart(object):
     def get_total_price(self):
         total_price = sum(
             item["price"] * item["quantity"] for item in self.cart.values()
+        )
+        return total_price
+
+    def get_total_discount(self):
+        total_discount = sum(
+            item["discount"] * item["quantity"] for item in self.cart.values()
+        )
+        return total_discount
+
+    def get_total_after_price(self):
+        total_price = sum(
+            item["after_price"] * item["quantity"] for item in self.cart.values()
         )
         return total_price
 
