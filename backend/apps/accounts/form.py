@@ -77,6 +77,10 @@ class CreateUserForm(forms.ModelForm):
         phone = self.cleaned_data["phone"]
         if User.objects.filter(phone_number=phone).exists():
             raise forms.ValidationError("this phone number already exists")
+        if not phone.isdigit():
+            raise forms.ValidationError("phone must be a number.")
+        if not phone.startswith("09"):
+            raise forms.ValidationError("phone must start with 09 digits.")
         return phone
 
 
@@ -90,13 +94,17 @@ class UserChangeForm(forms.ModelForm):
         fields = ("email", "phone", "first_name", "last_name", "password", "last_login")
 
     def clean_phone_number(self):
-        phone = self.cleaned_data["phone"]
+        phone = self.cleaned_data.get("phone")
         if (
             User.objects.exclude(id=self.instance.id)
             .filter(phone_number=phone)
             .exists()
         ):
             raise forms.ValidationError("this phone number already exists")
+        if not phone.isdigit():
+            raise forms.ValidationError("phone must be a number.")
+        if not phone.startswith("09"):
+            raise forms.ValidationError("phone must start with 09 digits.")
         return phone
 
     def clean_username(self):
