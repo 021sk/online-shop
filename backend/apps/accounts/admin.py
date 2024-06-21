@@ -1,7 +1,12 @@
 from django.contrib import admin
-from apps.accounts.models import User
+from apps.accounts.models import User, Address
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from apps.accounts.form import CreateUserForm, UserChangeForm
+
+
+class AddressInline(admin.TabularInline):
+    model = Address
+    extra = 0
 
 
 class UserAdmin(BaseUserAdmin):
@@ -60,7 +65,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email", "username", "first_name", "last_name")
     ordering = ("username",)
     filter_horizontal = ("groups", "user_permissions")
-
+    inlines = (AddressInline,)
     # def get_form(self, request, obj=None, **kwargs):
     #     form = super().get_form(request, obj, **kwargs)
     #     is_superuser = request.user.is_superuser

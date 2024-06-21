@@ -4881,6 +4881,7 @@
                 data: {
                     'item_id': itemId,
                     'action': action,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
 
                 },
                 success: function(response){
@@ -4909,6 +4910,7 @@
                 url: '{% url 'api_cart:remove_item' %}',
                 data: {
                     'item_id': itemId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
 
                 },
                 success: function(response){

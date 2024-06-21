@@ -7835,6 +7835,7 @@
               $.ajax({
                  type: 'post',
                  url: '{% url 'api_cart:add_to_cart' product.id %}',
+                 data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
 
                  success:function(data){
                      $('#item_count').text(data.item_count);

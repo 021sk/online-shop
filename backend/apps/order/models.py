@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from apps.core.models import TimeStampMixin, LogicalMixin
 from apps.home.models import Product
+from apps.accounts.models import Address
 
 
 class Order(TimeStampMixin, LogicalMixin):
@@ -10,7 +11,7 @@ class Order(TimeStampMixin, LogicalMixin):
     )
     paid = models.BooleanField(default=False)
     discount = models.IntegerField(blank=True, null=True, default=None)
-    # address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
     def get_total_price(self):
         total = sum(item.get_cost() for item in self.items.all())
@@ -36,7 +37,7 @@ class OrderItem(models.Model):
         return str(self.id)
 
 
-class coupon(models.Model):
+class Coupon(models.Model):
     user = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name="coupons"
     )
