@@ -10,5 +10,6 @@ urlpatterns = [
     ),
     path("register/", auth.UserRegisterView.as_view(), name="registration"),
     path("logout/", auth.LogoutView.as_view(), name="logout"),
+    path("user_edit/", auth.edit_user, name="edit_account"),
     # (auth)/forget-password
 ]

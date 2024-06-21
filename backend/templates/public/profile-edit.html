@@ -4845,188 +4845,55 @@
 
             <!-- content -->
             <div class="col-span-12 lg:col-span-9">
-              <div class="rounded-lg bg-muted p-5 shadow-base">
-                <!-- Title -->
-                <h1 class="relative mb-16 w-fit text-xl font-medium">
-                  اطلاعات حساب کاربری شما
-                  <span
-                    class="absolute right-0 top-10 h-[3px] w-full rounded-full bg-primary"
-                  >
-                  </span>
-                </h1>
-                <!-- Content -->
-                <div class="grid grid-cols-2 gap-4">
-                  <!-- full name -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="fullname-modal"
-                      data-modal-toggle="fullname-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">نام و نام خانوادگی</div>
-                            <div class="mr-2 text-text/60">تایماز اکبری</div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#edit" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <!-- national code -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="nationalCode-modal"
-                      data-modal-toggle="nationalCode-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div
-                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-red-500 dark:text-red-400"
-                        >
-                          تایید نشده
-                        </div>
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">کد ملی</div>
+              {% if messages %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          {% for message in messages %}
+          <span class="block sm:inline">{{message}}</span>
+          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <button class=" btn-close fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></button>
+          </span>
+          {% endfor %}
+      </div>
+      {% endif%}
+             <div class="bg-white p-10 rounded-lg shadow-md ">
+      {% if form.errors %}
+       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <span class="block sm:inline">There was an error with your form ...</span>
+          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+              <button class="btn-close fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+              </button>
+          </span>
+       </div>
+      {% endif %}
+      <h1 class="text-xl font-bold mb-4">Edit Account</h1>
+      <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+          {% for field in forms %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        <label for="{{ field.auto_id }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label> {{ field }}
+        {% if field.help_text %}
+          <p class="help" id="{{ field.auto_id }}_helptext">
+            {{ field.help_text|safe }}
+          </p>
+        {% endif %}
+    </div>
+{% endfor %}
 
-                            <div class="mr-2 text-text/60">ثبت نشده</div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#plus" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <!-- phone number  -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="phoneNumber-modal"
-                      data-modal-toggle="phoneNumber-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div
-                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-primary"
-                        >
-                          تایید شده
-                        </div>
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">شماره موبایل</div>
 
-                            <div class="mr-2 text-text/60">09000000000</div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#edit" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <!-- email   -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="email-modal"
-                      data-modal-toggle="email-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div
-                          class="absolute inset-x-0 -bottom-2.5 mx-auto w-fit rounded-full bg-muted px-3 text-sm font-medium text-primary"
-                        >
-                          تایید شده
-                        </div>
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">ایمیل</div>
-
-                            <div class="mr-2 text-text/60">
-                              rotikala@gmail.com
-                            </div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#edit" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <!-- password   -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="password-modal"
-                      data-modal-toggle="password-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">کلمه عبور</div>
-
-                            <div class="mr-2 select-none text-text/60">
-                              <input
-                                type="password"
-                                value="password"
-                                class="select-none bg-transparent"
-                                disabled
-                              />
-                            </div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#edit" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                  <!-- birth date   -->
-                  <div class="col-span-2 sm:col-span-1">
-                    <button
-                      class="w-full"
-                      type="button"
-                      data-modal-target="birthDate-modal"
-                      data-modal-toggle="birthDate-modal"
-                    >
-                      <div
-                        class="relative rounded-lg border p-4 hover:border-border/50"
-                      >
-                        <div class="flex justify-between">
-                          <div class="flex flex-col items-start gap-y-2">
-                            <div class="text-text/90">تاریخ تولد</div>
-
-                            <div class="mr-2 select-none text-text/60">
-                              11 / 08 / 1380
-                            </div>
-                          </div>
-                          <svg class="h-6 w-6 text-primary">
-                            <use xlink:href="#edit" />
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
+          <br>
+          <button
+                  class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                  type="submit"
+                  data-twe-ripple-init
+                  data-twe-ripple-color="light"
+                  style="
+                    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                  ">
+                  save
+          </button>
+      </form>
+    </div>
             </div>
           </div>
         </div>

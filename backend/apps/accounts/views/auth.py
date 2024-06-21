@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login, get_user_model, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.messages.views import SuccessMessageMixin
 
-# from apps.accounts.tasks import send_mail, print_after_3s
+from apps.accounts.form import UserChangeForm
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
@@ -112,6 +113,21 @@ class LogoutView(generic.RedirectView):
 
         messages.info(self.request, "Bye Bye 👋🏻")
         return super().get(self.request, *args, **kwargs)
+
+
+@login_required
+def edit_user(request):
+    if request.method == "POST":
+        user_form = UserChangeForm(
+            request.POST, instance=request.user, files=request.FILES
+        )
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, "Your profile has been updated")
+            return redirect("edit_account")
+    else:
+        user_form = UserChangeForm(instance=request.user)
+    return render(request, "public/profile-edit.html", {"forms": user_form})
 
 
 # class UserRegisterView(generic.View):

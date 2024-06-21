@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-
 
 User = get_user_model()
 
@@ -85,13 +83,41 @@ class CreateUserForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField(
-        help_text='you can change password using <a href="../password/">this form</a>.'
-    )
+    # password = ReadOnlyPasswordHashField(
+    #     help_text='you can change password using <a href="../password/">this form</a>.'
+    # )
 
     class Meta:
         model = User
-        fields = ("email", "phone", "first_name", "last_name", "password", "last_login")
+        fields = ("email", "phone", "first_name", "last_name", "username")
+
+        widgets = {
+            "username": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "phone": forms.TextInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+            "email": forms.EmailInput(
+                attrs={
+                    "class": "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                }
+            ),
+        }
 
     def clean_phone_number(self):
         phone = self.cleaned_data.get("phone")
