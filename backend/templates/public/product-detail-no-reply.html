@@ -1576,7 +1576,7 @@
                             <span class="text-sm">تومان</span>
                           </div>
                         </div>
-                        <a href="./checkout-shipping.html">
+                        <a href="{% url 'cart:order_create' %}">
                           <button
                             class="btn-primary w-32 py-3 text-sm"
                             type="button"
@@ -3351,6 +3351,7 @@
                     data-drawer-show="user-basket-drawer-navigation"
                     data-drawer-target="user-basket-drawer-navigation"
                     type="button"
+                    href="{% url 'cart:order_create' %}"
                   >
                     <span class="cursor-pointer">
 

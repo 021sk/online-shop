@@ -11,58 +11,106 @@ from django.contrib import messages
 from django.core.cache import cache
 from django.http import response
 from django.views import generic
-from utils import catche, mail
 from apps.accounts import form
 from uuid import uuid4
+from django.views import View
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 User = get_user_model()
 
 
+# @method_decorator(csrf_exempt, name="dispatch")
+# class LoginView(generic.View):
+#     template_name = "public/login-password.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         return render(request, self.template_name)
+#
+#     def post(self, request):
+#         username = self.request.POST.get("username", None)
+#         password = self.request.POST.get("password", None)
+#
+#         if not all((username, password)):
+#             return response.HttpResponse(
+#                 "'username' or 'password' should not be null !", status=400
+#             )
+#
+#         if user := authenticate(password=password, username=username):
+#             if user.is_active:
+#                 login(self.request, user)
+#                 print("Logged in successfully")
+#                 # print_after_3s.delay()
+#
+#                 return redirect("home")
+#
+#             # create token and activate
+#             if not catche.get_or_create(
+#                 f"activate_token_user_{user.username}", lambda: uuid4().hex, 300
+#             ):
+#                 print(cache.get(f"activate_token_user_{user.username}"))
+#                 # send_verification_code
+#                 # username = user.username
+#                 mail.send_mail(
+#                     f"Verification {user.username}",
+#                     user.email,
+#                     "mail/verfication.html",
+#                     {
+#                         "user": user,
+#                         "token": cache.get(f"activate_token_user_{user.username}"),
+#                         "host": self.request.get_host(),
+#                     },
+#                 )
+#
+#             return redirect("public_activate_page")
+#
+#         return response.HttpResponse("User not found !", status=404)
+
+
 @method_decorator(csrf_exempt, name="dispatch")
-class LoginView(generic.View):
+class LoginView(View):
     template_name = "public/login-password.html"
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        next_url = request.GET.get("next", "")
+        return render(request, self.template_name, {"next": next_url})
 
     def post(self, request):
-        username = self.request.POST.get("username", None)
-        password = self.request.POST.get("password", None)
+        username = request.POST.get("username", None)
+        password = request.POST.get("password", None)
+        next_url = request.POST.get("next", "")
 
         if not all((username, password)):
-            return response.HttpResponse(
+            return HttpResponse(
                 "'username' or 'password' should not be null !", status=400
             )
 
-        if user := authenticate(password=password, username=username):
+        user = authenticate(password=password, username=username)
+        if user:
             if user.is_active:
-                login(self.request, user)
+                login(request, user)
                 print("Logged in successfully")
-                # print_after_3s.delay()
-
-                return redirect("home")
+                return redirect(next_url if next_url else "home")
 
             # create token and activate
-            if not catche.get_or_create(
+            if not cache.get_or_create(
                 f"activate_token_user_{user.username}", lambda: uuid4().hex, 300
             ):
                 print(cache.get(f"activate_token_user_{user.username}"))
-                # send_verification_code
-                # username = user.username
-                mail.send_mail(
+                send_mail(
                     f"Verification {user.username}",
                     user.email,
-                    "mail/verfication.html",
+                    "mail/verification.html",
                     {
                         "user": user,
                         "token": cache.get(f"activate_token_user_{user.username}"),
-                        "host": self.request.get_host(),
+                        "host": request.get_host(),
                     },
                 )
 
             return redirect("public_activate_page")
 
-        return response.HttpResponse("User not found !", status=404)
+        return HttpResponse("User not found!", status=404)
 
 
 #######################################################################################

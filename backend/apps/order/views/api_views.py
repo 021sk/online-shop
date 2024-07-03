@@ -85,15 +85,39 @@ class RemoveItemView(APIView):
             )
 
 
+# class ActiveAddressView(LoginRequiredMixin, APIView):
+#     def get(self, request):
+#         # address_id = request.data.get("address_id")
+#         address_id = request.query_params.get("address_id")
+#         print(address_id)
+#         user = request.user  # Get the logged-in user
+#         address = get_object_or_404(
+#             Address, id=address_id, user=user
+#         )  # Ensure the address belongs to the user
+#
+#         address.activate()  # Assuming this method activates the address
+#         address.save()  # Save the changes
+#         return Response(
+#             {"message": "Address activated successfully."}, status=status.HTTP_200_OK
+#         )
+
+
 class ActiveAddressView(LoginRequiredMixin, APIView):
-    def get(self, request, address_id):
+    def get(self, request):
+        address_id = request.query_params.get("address_id")
+        if not address_id:
+            return Response(
+                {"message": "Address ID not provided."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        print(address_id)
         user = request.user  # Get the logged-in user
         address = get_object_or_404(
             Address, id=address_id, user=user
         )  # Ensure the address belongs to the user
 
         address.activate()  # Assuming this method activates the address
-        address.save()  # Save the changes
         return Response(
             {"message": "Address activated successfully."}, status=status.HTTP_200_OK
         )
@@ -119,6 +143,9 @@ class OrderCreateView(LoginRequiredMixin, APIView):
                     price=item["price"],
                 )
             cart.clear()
+            order_id = order.id
+            print(order_id)
             return Response(
-                {"message": "Order created successfully."}, status=status.HTTP_200_OK
+                {"message": "Order created successfully.", "order_id": order_id},
+                status=status.HTTP_200_OK,
             )

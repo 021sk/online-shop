@@ -4,6 +4,7 @@ from decouple import config
 USE_TZ = True
 USE_I18N = True
 LANGUAGE_CODE = "en-us"
+LOGIN_URL = "/auth/login/"
 ROOT_URLCONF = "config.urls"
 AUTH_USER_MODEL = "accounts.User"
 WSGI_APPLICATION = "config.wsgi.application"

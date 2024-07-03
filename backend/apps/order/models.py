@@ -20,6 +20,10 @@ class Order(TimeStampMixin, LogicalMixin):
             return int(total - discount_price)
         return total
 
+    def get_total_discount(self):
+        total = sum(item.get_discount() for item in self.items.all())
+        return total
+
     def __str__(self):
         return f"{self.user} - {str(self.id)}"
 
@@ -32,6 +36,9 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+    def get_discount(self):
+        return self.product.discount * self.quantity
 
     def __str__(self):
         return str(self.id)

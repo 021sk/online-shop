@@ -1342,7 +1342,7 @@
                       <span
                         class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
                       >
-                        10
+                       {{ cart|length }}
                       </span>
                     </button>
 
@@ -3357,8 +3357,7 @@
                     </span>
                     <span
                       class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
-                    >
-                      10
+                    >{{ cart|length }}
                     </span>
                   </button>
                 </div>
@@ -4329,7 +4328,7 @@
                         alt=""
                         class="h-20 w-20"
                         loading="lazy"
-                        src="./assets/images/products/p1.png"
+                        src="/assets/images/products/p1.png"
                       />
                     </a>
                     <button
@@ -4705,7 +4704,7 @@
                {% for address in addresses %}
 <fieldset class="space-y-2">
   <legend class="sr-only">Address</legend>
-  <div>
+  <div class="current-address" data-address-id = "{{ address.id }}">
     <input
       type="radio"
       name="address"
@@ -4897,11 +4896,11 @@
                   <!-- cart items price before discount - coupon -->
                   <div class="flex items-center justify-between gap-x-2 py-6">
                     <div class="text-sm text-text/90 lg:text-base">
-                      قیمت کالا ها (2)
+                      قیمت کالا ها ({{ cart|length }})
                     </div>
 
                     <div class="text-sm text-primary lg:text-base">
-                      <span class="font-bold">2,400,000</span>
+                      <span class="font-bold">{{ cart.get_total_price }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
@@ -4912,7 +4911,7 @@
                     <div
                       class="text-sm font-medium text-red-500 dark:text-red-400 lg:text-base"
                     >
-                      <span class="font-bold">1,220,000</span>
+                      <span class="font-bold">{{ cart.get_total_discount }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
@@ -4947,13 +4946,13 @@
                     </div>
 
                     <div class="text-sm text-primary lg:text-base">
-                      <span class="font-bold">2,400,000</span>
+                      <span class="font-bold">{{ cart.get_total_after_price }}</span>
                       <span class="text-xs lg:text-sm">تومان</span>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <a href="./checkout-payment.html" class="btn-primary py-3">
+                  <a  class="btn-primary py-3 make-order">
                     ادامه فرایند خرید
                   </a>
                 </div>
@@ -4966,7 +4965,7 @@
                   class="btn-primary flex-grow py-3"
                   href="./checkout-payment.html"
                 >
-                  ادامه فرایند خرید</a
+                  خرید</a
                 >
                 <div class="flex flex-col items-center gap-y-1">
                   <div class="text-sm text-text/60">مبلغ قابل پرداخت</div>
@@ -5536,7 +5535,51 @@
       </div>
     </div>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+       $(document).ready(function(){
+
+        $('.current-address').on('click', function(){
+            activeAddress($(this).data('address-id'));
+        });
+
+        function activeAddress(addressId){
+            $.ajax({
+                type: 'GET',
+                url: '{% url 'api_cart:active_address' %}',
+                data: {
+                    'address_id': addressId,
+
+                },
+
+            });
+        }
+
+       });
+$(document).ready(function () {
+    $('.make-order').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '{% url "api_cart:order_create" %}',
+            headers: {
+
+            },
+            success: function (data) {
+                var order_id = data.order_id;
+                var redirectUrl = '/cart/detail/' + order_id ;  // Construct the URL directly
+                window.location.replace(redirectUrl);
+            },
+            error: function (xhr, status, error) {
+                console.error("An error occurred: " + error);
+                // Optionally, handle errors here
+            }
+        });
+    });
+});
+
+
+
+
     document.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll("[data-dropdown-toggle]").forEach(function(button) {
     button.addEventListener("click", function() {

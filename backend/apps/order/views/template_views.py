@@ -14,6 +14,11 @@ class CartView(View):
 
 
 class ShipingView(LoginRequiredMixin, View):
+    login_url = (
+        "/auth/login/"  # Specify your login URL if it's different from the default
+    )
+    redirect_field_name = "next"  # This is the default redirect field name
+
     def get(self, request):
         user = request.user
         address = Address.objects.filter(user=user)
@@ -26,7 +31,13 @@ class ShipingView(LoginRequiredMixin, View):
         )
 
 
-class OrderDetailView(View, LoginRequiredMixin):
+class OrderDetailView(LoginRequiredMixin, View):
     def get(self, request, order_id):
         order = Order.objects.get(id=order_id)
-        return render(request, "public/checkout-payment.html", {"order": order})
+        must_pay = order.get_total_price() - order.get_total_discount()
+        print(must_pay)
+        return render(
+            request,
+            "public/checkout-payment.html",
+            {"order": order, "mustpay": must_pay},
+        )

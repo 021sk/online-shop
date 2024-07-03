@@ -1349,8 +1349,7 @@
                       </span>
                       <span
                         class="absolute -right-2.5 -top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-primary-btn text-sm font-bold text-white"
-                      >
-                        10
+                      >{{ cart|length }}
                       </span>
                     </button>
 
@@ -1582,7 +1581,7 @@
                             <span class="text-sm">تومان</span>
                           </div>
                         </div>
-                        <a href="./checkout-shipping.html">
+                        <a href="{% url 'cart:order_create' %}">
                           <button
                             class="btn-primary w-32 py-3 text-sm"
                             type="button"
