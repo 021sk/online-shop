@@ -126,10 +126,10 @@ if DEBUG:
     # EMAIL_HOST_PASSWORD = ""
     # DEFAULT_FROM_EMAIL = "shahabkabiri@maktab.dev"
     EMAIL_HOST = "smtp.gmail.com"
-    EMAIL_HOST_USER = "shahaabkabiri73@gmail.com"
+    EMAIL_HOST_USER = "shakabiri69@gmail.com"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_PASSWORD = "sxdn ehvn iyhs dqrs"
+    EMAIL_HOST_PASSWORD = "ofus rkqo zwyc daea"
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 

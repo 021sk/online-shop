@@ -1,4 +1,5 @@
 from django.urls import path
+
 from apps.order.views import api_views
 
 app_name = "api_cart"
@@ -17,5 +18,8 @@ urlpatterns = [
         "active_address/",
         api_views.ActiveAddressView.as_view(),
         name="active_address",
+    ),
+    path(
+        "apply/<int:order_id>", api_views.CouponApplyView.as_view(), name="apply_coupon"
     ),
 ]

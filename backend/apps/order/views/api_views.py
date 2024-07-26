@@ -6,7 +6,8 @@ from apps.home.models import Product
 from rest_framework import status
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.accounts.models import Address
-from ..models import Order, OrderItem
+from ..models import Order, OrderItem, Coupon
+from ..serializer import CouponApplySerializer
 
 
 class CartAddApiView(APIView):
@@ -148,4 +149,66 @@ class OrderCreateView(LoginRequiredMixin, APIView):
             return Response(
                 {"message": "Order created successfully.", "order_id": order_id},
                 status=status.HTTP_200_OK,
+            )
+
+
+# class CouponApplyView(APIView):
+#     serializer = CouponApplySerializer
+#
+#     def post(self, request, order_id):
+#         now = datetime.datetime.now()
+#         coupon_serializer = self.serializer(data=request.data)
+#         if coupon_serializer.is_valid():
+#             code = coupon_serializer.validated_data["code"]
+#             try:
+#                 coupon = Coupon.objects.get(code__exact=code, valid_from__lte=now, valid_to__gte=now)
+#             except Coupon.DoesNotExist:
+#                 return Response({"message": "Coupon does not exist"}, status=status.HTTP_404_NOT_FOUND)
+#             order = Order.objects.get(id=order_id)
+#             new_price = order.get_total_price()
+#             order.discount = coupon.discount
+#             order.save()
+#             return Response({"message": "order discounted successfully apply", "new_price": new_price}, status=status.HTTP_200_OK)
+
+
+class CouponApplyView(APIView):
+    serializer_class = CouponApplySerializer
+
+    def post(self, request, order_id):
+        # now = datetime.datetime.now()
+        coupon_serializer = self.serializer_class(data=request.data)
+
+        if coupon_serializer.is_valid():
+            code = coupon_serializer.validated_data["code"]
+            print(code)
+            try:
+                coupon = Coupon.objects.get(code__exact=code, active=True)
+            except Coupon.DoesNotExist:
+                return Response(
+                    {"message": "Coupon does not exist or is not valid"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            try:
+                order = Order.objects.get(id=order_id)
+            except Order.DoesNotExist:
+                return Response(
+                    {"message": "Order does not exist"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
+
+            # Apply the discount to the order
+            order.discount = coupon.discount
+            order.save()
+
+            # Calculate the new price based on the discount
+            new_price = order.get_total_price()
+
+            return Response(
+                {"message": "Order discounted successfully", "new_price": new_price},
+                status=status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                coupon_serializer.errors, status=status.HTTP_400_BAD_REQUEST
             )

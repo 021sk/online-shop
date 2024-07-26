@@ -20,6 +20,7 @@ eventlet = "^0.36.1"
 django-storages = "^1.14.3"
 boto3 = "^1.34.108"
 django-celery-beat = "^2.6.0"
+psycopg2 = "^2.9.9"
 
 
 [tool.poetry.group.dev.dependencies]

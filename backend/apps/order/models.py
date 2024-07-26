@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from apps.core.models import TimeStampMixin, LogicalMixin
 from apps.home.models import Product
 from apps.accounts.models import Address
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Order(TimeStampMixin, LogicalMixin):
@@ -45,13 +46,15 @@ class OrderItem(models.Model):
 
 
 class Coupon(models.Model):
-    user = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, related_name="coupons"
-    )
+    # user = models.ForeignKey(
+    #     get_user_model(), on_delete=models.CASCADE, related_name="coupons"
+    # )
     code = models.CharField(max_length=30, unique=True, default=None)
     valid_from = models.DateTimeField()
     valid_to = models.DateTimeField()
-    discount = models.IntegerField()
+    discount = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(90)]
+    )
     active = models.BooleanField(default=False)
 
     def __str__(self):

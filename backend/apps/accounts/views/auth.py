@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 from django.contrib import messages
+from utils import catche, mail
 from django.core.cache import cache
 from django.http import response
 from django.views import generic
@@ -15,7 +16,7 @@ from apps.accounts import form
 from uuid import uuid4
 from django.views import View
 from django.http import HttpResponse
-from django.core.mail import send_mail
+
 
 User = get_user_model()
 
@@ -93,18 +94,18 @@ class LoginView(View):
                 return redirect(next_url if next_url else "home")
 
             # create token and activate
-            if not cache.get_or_create(
+            if not catche.get_or_create(
                 f"activate_token_user_{user.username}", lambda: uuid4().hex, 300
             ):
                 print(cache.get(f"activate_token_user_{user.username}"))
-                send_mail(
+                mail.send_mail(
                     f"Verification {user.username}",
                     user.email,
-                    "mail/verification.html",
+                    "mail/verfication.html",
                     {
                         "user": user,
                         "token": cache.get(f"activate_token_user_{user.username}"),
-                        "host": request.get_host(),
+                        "host": self.request.get_host(),
                     },
                 )
 
